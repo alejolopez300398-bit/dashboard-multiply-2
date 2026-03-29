@@ -1,0 +1,5 @@
+{
+  "startCommand": "echo static",
+  "installDependencies": false,
+  "compileCommand": ""
+}

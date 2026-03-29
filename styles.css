@@ -1,0 +1,101 @@
+body{
+  font-family: Arial, sans-serif;
+  background:#000;
+  margin:0;
+  padding:15px;
+  color:white;
+  }
+  
+  .header{
+  background:#111;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+  }
+  
+  input{
+  width:100%;
+  padding:14px;
+  font-size:16px;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#000;
+  color:white;
+  }
+  
+  .grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:15px;
+  }
+  
+  .card{
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.25);
+  color:black;
+  }
+  
+  .card.full{
+  grid-column:1/-1;
+  overflow-x:auto;
+  }
+  
+  .card h3{
+  margin-top:0;
+  background:#4b5d3a;
+  color:white;
+  padding:10px;
+  border-radius:6px;
+  font-size:14px;
+  }
+  
+  .item{
+  margin-bottom:8px;
+  font-size:14px;
+  }
+  
+  .label{
+  font-weight:bold;
+  color:#333;
+  font-size:12px;
+  }
+  
+  .link{
+  color:#2e7d32;
+  cursor:pointer;
+  word-break:break-all;
+  }
+  
+  .copy{
+  font-size:11px;
+  color:#666;
+  cursor:pointer;
+  }
+  
+  .table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+  min-width:1000px;
+  }
+  
+  .table th{
+  background:#4b5d3a;
+  color:white;
+  padding:8px;
+  text-align:left;
+  }
+  
+  .table td{
+  border-bottom:1px solid #eee;
+  padding:6px;
+  white-space:pre-line;
+  }
+  
+  .loading{
+  text-align:center;
+  padding:30px;
+  font-weight:bold;
+  }
