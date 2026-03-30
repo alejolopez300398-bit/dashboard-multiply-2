@@ -1,6 +1,6 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(135deg, #e8f5e9 0%, #d7f0db 100%);
+  background: #e9edf2;
   margin: 0;
   padding: 0;
   color: #1f2933;
@@ -10,14 +10,14 @@ body {
   /* HEADER */
   
   .header {
-  background: #ffffff;
-  padding: 20px 30px;
-  border-bottom: 3px solid #1d5e35;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  }
+    background: transparent;
+    padding: 20px 30px;
+    border-bottom: 1px solid #d9dee5;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(6px);
+    }
   
   .header-title {
   font-size: 22px;
@@ -66,10 +66,9 @@ body {
     border-radius: 14px;
     padding: 18px;
     box-shadow: 
-    0 15px 40px rgba(0,0,0,0.12),
-    0 4px 12px rgba(0,0,0,0.06);
-    border: 1px solid rgba(0,0,0,0.05);
-    backdrop-filter: blur(4px);
+    0 8px 20px rgba(0,0,0,0.06),
+    0 2px 6px rgba(0,0,0,0.04);
+    border: 1px solid #e3e7ed;
     }
   
   /* TITLES */
