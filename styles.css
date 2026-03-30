@@ -83,15 +83,19 @@ body {
   /* WATERMARK */
   
   .watermark {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 28vw;
-  max-width: 420px;
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 0;
-  }
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 45vw;
+    max-width: 750px;
+    
+    opacity: 0.4;
+    
+    pointer-events: none;
+    z-index: 0;
+    }
   
   /* TABLE */
   
@@ -125,4 +129,21 @@ body {
   padding: 30px;
   font-size: 14px;
   color: #6b7280;
+  }
+
+  /* WATERMARK LAYER FIX */
+
+.header {
+  position: relative;
+  z-index: 2;
+  }
+  
+  #dashboard {
+  position: relative;
+  z-index: 2;
+  }
+  
+  .loading {
+  position: relative;
+  z-index: 2;
   }
