@@ -62,13 +62,18 @@ body {
   /* PANEL */
   
   #dashboard > div {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 14px;
     padding: 18px;
+    
     box-shadow: 
     0 8px 20px rgba(0,0,0,0.06),
     0 2px 6px rgba(0,0,0,0.04);
-    border: 1px solid #e3e7ed;
+    
+    border: 1px solid rgba(255,255,255,0.6);
+    
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     }
   
   /* TITLES */
@@ -88,10 +93,10 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     
-    width: 45vw;
-    max-width: 750px;
+    width: 52vw;
+    max-width: 860px;
     
-    opacity: 0.35;
+    opacity: 0.30;
     
     pointer-events: none;
     z-index: 0;
