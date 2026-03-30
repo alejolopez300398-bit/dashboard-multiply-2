@@ -62,7 +62,7 @@ body {
   /* PANEL */
   
   #dashboard > div {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.82);
     border-radius: 14px;
     padding: 18px;
     
@@ -93,8 +93,8 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     
-    width: 50vw;
-    max-width: 830px;
+    width: 47vw;
+    max-width: 780px;
     
     opacity: 0.35;
     
