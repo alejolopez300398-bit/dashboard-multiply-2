@@ -90,6 +90,22 @@ dash.style.display="grid"
 
 dash.innerHTML=`
 
+setTimeout(()=>{
+document.querySelectorAll(".card-header").forEach(header=>{
+header.addEventListener("click",()=>{
+
+const card = header.parentElement
+
+document.querySelectorAll(".card").forEach(c=>{
+c.classList.remove("open")
+})
+
+card.classList.add("open")
+
+})
+})
+},0)
+
 ${card("Datos Proyecto",
 ["Coordinador","Residente","Proyecto","Contratista","Tipo proyecto"],
 row.slice(1,6))}
@@ -115,16 +131,24 @@ ${impReprocesos(code)}
 }
 
 function card(t,l,v,links=false){
-let h=`<div class="card"><h3>${t}</h3>`
-l.forEach((x,i)=>{
-h+=`
-<div class="item">
-<div class="label">${x}</div>
-<div>${links?linkify(v[i]):(v[i]||"")}</div>
-</div>`
-})
-return h+"</div>"
-}
+  let h=`
+  <div class="card">
+    <div class="card-header">${t}</div>
+    <div class="card-body">
+  `
+  
+  l.forEach((x,i)=>{
+  h+=`
+  <div class="item">
+  <div class="label">${x}</div>
+  <div>${links?linkify(v[i]):(v[i]||"")}</div>
+  </div>`
+  })
+  
+  return h+`
+    </div>
+  </div>`
+  }
 
 function impPedido(code){
 const data=imp1.filter(r=>clean(r[2])===code)

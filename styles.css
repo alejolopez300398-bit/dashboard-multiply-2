@@ -150,3 +150,26 @@ body {
   position: relative;
   z-index: 2;
   }
+
+  .card-body{
+    display:none;
+    }
+    
+    .card.open .card-body{
+    display:block;
+    }
+    
+    .card-header{
+    cursor:pointer;
+    font-weight:600;
+    padding:10px 0;
+    }
+    
+    .card-header::before{
+    content:"▶";
+    margin-right:8px;
+    }
+    
+    .card.open .card-header::before{
+    content:"▼";
+    }
