@@ -155,7 +155,11 @@ rows+=`
 })
 
 return wrapCard("IMP Pedido 1 y 2",
-`<table><tbody>${rows}</tbody></table>`)
+`<div class="table-container">
+<table>
+<tbody>${rows}</tbody>
+</table>
+</div>`)
 }
 
 function impAdicional(code){
@@ -176,7 +180,11 @@ rows+=`
 })
 
 return wrapCard("IMP Adicionales",
-`<table><tbody>${rows}</tbody></table>`)
+`<div class="table-container">
+<table>
+<tbody>${rows}</tbody>
+</table>
+</div>`)
 }
 
 function impVivvidecor(code){
@@ -197,7 +205,11 @@ rows+=`
 })
 
 return wrapCard("IMP Vivvidecor",
-`<table><tbody>${rows}</tbody></table>`)
+`<div class="table-container">
+<table>
+<tbody>${rows}</tbody>
+</table>
+</div>`)
 }
 
 function impReprocesos(code){
@@ -221,7 +233,11 @@ rows+=`
 })
 
 return wrapCard("IMP Reprocesos carpinteria",
-`<table><tbody>${rows}</tbody></table>`)
+`<div class="table-container">
+<table>
+<tbody>${rows}</tbody>
+</table>
+</div>`)
 }
 
 init()
