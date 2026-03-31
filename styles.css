@@ -111,16 +111,26 @@ body {
   /* ITEMS */
   
   .item{
-  display:flex;
-  justify-content:space-between;
-  padding:6px 0;
-  border-bottom:1px solid #f1f5f9;
-  font-size:13px;
-  }
-  
-  .label{
-  color:#6b7280;
-  }
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:6px 0;
+    border-bottom:1px solid #f1f5f9;
+    font-size:13px;
+    }
+    
+    .label{
+    color:#6b7280;
+    flex-shrink:0;
+    }
+    
+    .item div:last-child{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    flex:1;
+    text-align:right;
+    }
   
   /* TITLES */
   
