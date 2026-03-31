@@ -2,8 +2,6 @@ import { SHEET_ID } from "./config.js";
 import { loadSheet } from "./modules/sheets.js";
 import { clean, linkify } from "./modules/utils.js";
 
-console.log("SHEET_ID:", SHEET_ID);
-
 const sheet=name=>
 `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(name)}`
 
@@ -22,59 +20,36 @@ let imp3=[]
 let imp4=[]
 
 async function init(){
+try{
+resumen = await load(urls.resumen)
+imp1 = await load(urls.imp1)
+imp2 = await load(urls.imp2)
+imp3 = await load(urls.imp3)
+imp4 = await load(urls.imp4)
+}catch(e){
+console.error(e)
+}
 
-  try{
-  
-  console.log("INIT START")
-  
-  resumen = await load(urls.resumen)
-  imp1 = await load(urls.imp1)
-  imp2 = await load(urls.imp2)
-  imp3 = await load(urls.imp3)
-  imp4 = await load(urls.imp4)
-  
-  }catch(e){
-  
-  console.error("INIT ERROR", e)
-  
-  }
-  
-  document.getElementById("loading").style.display="none"
-  
-  console.log("INIT END")
-  
-  }
+document.getElementById("loading").style.display="none"
+}
 
 async function load(url){
+try{
+const data = await loadSheet(url)
+return data.slice(1)
+}catch(e){
+return []
+}
+}
 
-  try{
-  
-  console.log("loading", url)
-  
-  const data = await loadSheet(url)
-  
-  console.log("loaded", data.length)
-  
-  return data.slice(1)
-  
-  }catch(e){
-  
-  console.error("Error loading", url, e)
-  
-  return []
-  
-  }
-  
-  }
+const search = document.getElementById("search");
 
-  const search = document.getElementById("search");
-
-  if(search){
-  search.addEventListener("input",e=>{
-  const code=clean(e.target.value)
-  if(code.length>2)buscar(code)
-  })
-  }
+if(search){
+search.addEventListener("input",e=>{
+const code=clean(e.target.value)
+if(code.length>2)buscar(code)
+})
+}
 
 function buscar(code){
 
@@ -83,28 +58,11 @@ dash.innerHTML=""
 dash.style.display="none"
 
 const row=resumen.find(r=>clean(r[0])===code)
-
 if(!row)return
 
 dash.style.display="grid"
 
 dash.innerHTML=`
-
-setTimeout(()=>{
-document.querySelectorAll(".card-header").forEach(header=>{
-header.addEventListener("click",()=>{
-
-const card = header.parentElement
-
-document.querySelectorAll(".card").forEach(c=>{
-c.classList.remove("open")
-})
-
-card.classList.add("open")
-
-})
-})
-},0)
 
 ${card("Datos Proyecto",
 ["Coordinador","Residente","Proyecto","Contratista","Tipo proyecto"],
@@ -128,31 +86,60 @@ ${impVivvidecor(code)}
 ${impReprocesos(code)}
 
 `
+
+initAccordion()
+}
+
+function initAccordion(){
+document.querySelectorAll(".card-header").forEach(header=>{
+header.addEventListener("click",()=>{
+
+const card = header.closest(".card")
+
+document.querySelectorAll(".card").forEach(c=>{
+c.classList.remove("open")
+})
+
+card.classList.add("open")
+
+})
+})
 }
 
 function card(t,l,v,links=false){
-  let h=`
-  <div class="card">
-    <div class="card-header">${t}</div>
-    <div class="card-body">
-  `
-  
-  l.forEach((x,i)=>{
-  h+=`
-  <div class="item">
-  <div class="label">${x}</div>
-  <div>${links?linkify(v[i]):(v[i]||"")}</div>
-  </div>`
-  })
-  
-  return h+`
-    </div>
-  </div>`
-  }
+let h=`
+<div class="card">
+<div class="card-header">${t}</div>
+<div class="card-body">
+`
+
+l.forEach((x,i)=>{
+h+=`
+<div class="item">
+<div class="label">${x}</div>
+<div>${links?linkify(v[i]):(v[i]||"")}</div>
+</div>`
+})
+
+return h+`
+</div>
+</div>`
+}
+
+function wrapCard(title,content){
+return`
+<div class="card">
+<div class="card-header">${title}</div>
+<div class="card-body">
+${content}
+</div>
+</div>`
+}
 
 function impPedido(code){
 const data=imp1.filter(r=>clean(r[2])===code)
 if(!data.length)return ""
+
 let rows=""
 data.forEach(r=>{
 rows+=`
@@ -166,18 +153,15 @@ rows+=`
 <td>${r[22]||""}</td>
 </tr>`
 })
-return`
-<div class="card full">
-<h3>IMP Pedido 1 y 2</h3>
-<table class="table">
-<tbody>${rows}</tbody>
-</table>
-</div>`
+
+return wrapCard("IMP Pedido 1 y 2",
+`<table><tbody>${rows}</tbody></table>`)
 }
 
 function impAdicional(code){
 const data=imp2.filter(r=>clean(r[0])===code)
 if(!data.length)return ""
+
 let rows=""
 data.forEach(r=>{
 rows+=`
@@ -190,18 +174,15 @@ rows+=`
 <td>${r[23]||""}</td>
 </tr>`
 })
-return`
-<div class="card full">
-<h3>IMP Adicionales</h3>
-<table class="table">
-<tbody>${rows}</tbody>
-</table>
-</div>`
+
+return wrapCard("IMP Adicionales",
+`<table><tbody>${rows}</tbody></table>`)
 }
 
 function impVivvidecor(code){
 const data=imp3.filter(r=>clean(r[0])===code)
 if(!data.length)return ""
+
 let rows=""
 data.forEach(r=>{
 rows+=`
@@ -214,41 +195,33 @@ rows+=`
 <td>${r[20]||""}</td>
 </tr>`
 })
-return`
-<div class="card full">
-<h3>IMP Vivvidecor</h3>
-<table class="table">
-<tbody>${rows}</tbody>
-</table>
-</div>`
+
+return wrapCard("IMP Vivvidecor",
+`<table><tbody>${rows}</tbody></table>`)
 }
 
 function impReprocesos(code){
 const data=imp4.filter(r=>clean(r[5])===code)
 if(!data.length)return ""
+
 let rows=""
 data.forEach(r=>{
+
 const solicitud = (r[8] || "")
 .replace(/\r\n/g,"\n")
 .replace(/\r/g,"\n")
 .replace(/\n/g,"<br>")
-const estado=r[19]||""
+
 rows+=`
 <tr>
 <td>${r[0]||""}</td>
 <td>${solicitud}</td>
-<td>${estado}</td>
+<td>${r[19]||""}</td>
 </tr>`
 })
-return`
-<div class="card full">
-<h3>IMP Reprocesos carpinteria</h3>
-<table class="table">
-<tbody>${rows}</tbody>
-</table>
-</div>`
+
+return wrapCard("IMP Reprocesos carpinteria",
+`<table><tbody>${rows}</tbody></table>`)
 }
 
 init()
-
-// push
