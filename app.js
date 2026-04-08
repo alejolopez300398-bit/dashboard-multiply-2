@@ -151,7 +151,6 @@ card.classList.add("open")
 }
 
 function card(t,l,v,links=false){
-
   let h=`
   <div class="card">
   <div class="card-header">${t}</div>
@@ -159,16 +158,12 @@ function card(t,l,v,links=false){
   `
   
   l.forEach((label,i)=>{
-  
-  const value = v[i] ?? ""
-  
   h+=`
-  <div class="card-row">
-  <div class="card-label">${label}</div>
-  <div class="card-value">${value}</div>
+  <div class="row">
+  <div class="label">${label}</div>
+  <div class="value">${v[i] ?? ""}</div>
   </div>
   `
-  
   })
   
   h+=`
@@ -177,7 +172,6 @@ function card(t,l,v,links=false){
   `
   
   return h
-  
   }
 
 function wrapCard(title,content){
