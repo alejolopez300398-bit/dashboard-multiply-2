@@ -84,7 +84,13 @@ function buscar(code){
   
   ${card("Datos Proyecto",
   ["Coordinador","Residente","Proyecto","Contratista","Tipo proyecto"],
-  values.slice(1,6))}
+  [
+  row.coordinador,
+  row.residente,
+  row.proyecto,
+  row.contratista,
+  row.tipo_proyecto
+  ])}
   
   ${card("Diseño",
   ["Padlet","Ppto aprobado","Ppto decor","Renders","Planos obra","Planos muebles"],
