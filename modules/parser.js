@@ -9,9 +9,9 @@ function cleanKey(str) {
 }
 
 export function normalizeSheet(rows) {
-  const headers = rows[0].map(cleanKey);
+  const headers = rows[1].map(cleanKey);
 
-  return rows.slice(1).map(row => {
+  return rows.slice(2).map(row => {
     const obj = {};
 
     headers.forEach((header, i) => {
