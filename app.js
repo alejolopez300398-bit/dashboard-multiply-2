@@ -26,6 +26,7 @@ async function init(){
   console.log("cargando resumen...")
   resumen = await loadObjects(urls.resumen)
   console.log("resumen cargado", resumen)
+  console.log("estructura resumen", resumen[0])
   
   imp1 = await load(urls.imp1)
   imp2 = await load(urls.imp2)
