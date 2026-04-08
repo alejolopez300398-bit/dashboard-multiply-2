@@ -7,7 +7,6 @@ function cleanKey(str) {
 
 export function normalizeSheet(rows) {
 
-  // encontrar fila que contiene "codigo"
   const headerIndex = rows.findIndex(row =>
     row.some(cell =>
       (cell || "").toLowerCase().includes("codigo")
@@ -17,12 +16,20 @@ export function normalizeSheet(rows) {
   const headers = rows[headerIndex].map(cleanKey);
 
   return rows.slice(headerIndex + 1).map(row => {
+
+    const paddedRow = [...row];
+
+    while (paddedRow.length < headers.length) {
+      paddedRow.push("");
+    }
+
     const obj = {};
 
     headers.forEach((header, i) => {
-      obj[header] = row[i];
+      obj[header] = paddedRow[i];
     });
 
     return obj;
   });
+
 }
