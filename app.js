@@ -26,7 +26,7 @@ async function init(){
   console.log("cargando resumen...")
   resumen = await loadObjects(urls.resumen)
   resumen = resumen.map(r => {
-    // Si existe la columna vacía "", renombrarla a "contacto"
+    // Si existe la columna vacía "", renombrarla a "contacto_contratista"
     if(r[""] !== undefined){
       r.contacto = r[""];
       delete r[""];
