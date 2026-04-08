@@ -8,11 +8,16 @@ function cleanKey(str) {
 
 export function normalizeSheet(rows) {
 
-  // fila 5 = headers reales
-  const headers = rows[4].map(cleanKey);
+  // encontrar fila que contiene "codigo"
+  const headerIndex = rows.findIndex(row =>
+    row.some(cell =>
+      (cell || "").toLowerCase().includes("codigo")
+    )
+  );
 
-  // fila 8 en adelante = datos
-  return rows.slice(7).map(row => {
+  const headers = rows[headerIndex].map(cleanKey);
+
+  return rows.slice(headerIndex + 1).map(row => {
     const obj = {};
 
     headers.forEach((header, i) => {
