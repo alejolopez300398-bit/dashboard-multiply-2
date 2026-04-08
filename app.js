@@ -67,7 +67,7 @@ const dash=document.getElementById("dashboard")
 dash.innerHTML=""
 dash.style.display="none"
 
-const row=resumen.find(r=>clean(r[0])===code)
+const row=resumen.find(r=>clean(r.proyecto)===code)
 if(!row)return
 
 dash.style.display="grid"
