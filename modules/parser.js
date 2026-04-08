@@ -1,5 +1,3 @@
-// modules/parser.js
-
 function cleanKey(str) {
   return str
     .toLowerCase()
@@ -9,9 +7,12 @@ function cleanKey(str) {
 }
 
 export function normalizeSheet(rows) {
-  const headers = rows[1].map(cleanKey);
 
-  return rows.slice(2).map(row => {
+  // usar fila 3 como headers reales
+  const headers = rows[2].map(cleanKey);
+
+  // datos empiezan desde fila 4
+  return rows.slice(3).map(row => {
     const obj = {};
 
     headers.forEach((header, i) => {
