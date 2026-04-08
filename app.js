@@ -83,7 +83,7 @@ function buscar(code){
   dash.innerHTML=`
   
   ${card("Datos Proyecto",
-  ["Cliente","Contacto cliente","Correo cliente","Proyecto","Direccion proyecto","Tipo proyecto"],
+  ["cliente","contacto_cliente","correo_cliente","proyecto","direccion_proyecto","tipo_proyecto"],
   [
   row.cliente,
   row.contacto_cliente,
@@ -94,7 +94,7 @@ function buscar(code){
   ])}
   
   ${card("Equipo proyecto",
-  ["Coordinador","Residente","Contratista obra civil","Contacto contratista"],
+  ["coordinador","residente","contratista_obra","contacto_contratista"],
   [
   row.coordinador,
   row.residente,
@@ -103,12 +103,12 @@ function buscar(code){
   ])}
 
   ${card("Diseño",
-  ["Vendedor","Lider diseño","Diseñador","Padlet o presentacion","Ppto aprobado","Ppto decor","Renders","Planos obra","Planos muebles"],
+  ["vendedor","lider_diseño","diseñador","padlet_o_ppt","ppto_aprobado","ppto_decor","renders","planos_obra","planos_muebles"],
   [
     row.vendedor,
     row.lider_diseño,
     row.diseñador,
-    row.padlet o ppt,
+    row.padlet_o_ppt,
     row.ppto_aprobado,
     row.ppto_decor,
     row.renders,
