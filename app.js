@@ -25,6 +25,14 @@ async function init(){
   
   console.log("cargando resumen...")
   resumen = await loadObjects(urls.resumen)
+  resumen = resumen.map(r => {
+    // Si existe la columna vacía "", renombrarla a "contacto"
+    if(r[""] !== undefined){
+      r.contacto = r[""];
+      delete r[""];
+    }
+    return r;
+  });
   console.log("resumen cargado", resumen)
   console.log("HEADERS:", Object.keys(resumen[0]))
   console.log("estructura resumen", resumen[0])
@@ -95,12 +103,12 @@ function buscar(code){
   ])}
   
   ${card("Equipo proyecto",
-  ["coordinador","residente","contratista_obra","contacto"],
+  ["coordinador","residente","contratista_obra","contacto_contratista"],
   [
   row.coordinador,
   row.residente,
   row.contratista_obra,
-  row.contacto
+  row.contacto_contratista
   ])}
 
   ${card("Diseño",
