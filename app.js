@@ -131,12 +131,12 @@ function buscar(code){
   ${card("fechas_proyecto",
   ["inicio_obra","entrega_inicial","entrega_final"],
   [
-    row.inicio_obra
+    row.inicio_obra,
     row.entrega_inicial,
     row.entrega_final
     ])}
   
-  ${card("Carpintería",
+  ${card("carpintería",
   ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","estado_rectificacion","link_rectificacion","meta_facturacion","real_facturacion","despacho_meta","despacho_real","ingreso_meta","ingreso_real","fin_meta","fin_real"],
   [
     row.estado,
