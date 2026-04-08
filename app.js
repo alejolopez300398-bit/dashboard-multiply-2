@@ -117,14 +117,14 @@ function buscar(code){
     ])}
   
   ${card("Entrega",
-  ["Entrega inicial","Entrega final"],
+  ["entrega_inicial","entrega_final"],
   [
     row.entrega_inicial,
     row.entrega_final
     ])}
   
   ${card("Carpintería",
-  ["Estado","Tipo","Instalador","Meta rectificación","Real rectificación","Link rectificación","Estado rectificación","Despacho real","Ingreso real","Fin real"],
+  ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","link_rectificación","estado_rectificación","despacho_real","ingreso_real","fin_real"],
   [
     row.estado,
     row.tipo,
