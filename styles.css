@@ -259,6 +259,7 @@ body {
 
 
 
+
                 .row{
                   display:flex;
                   justify-content:space-between;
@@ -277,3 +278,21 @@ body {
                   text-align:right;
                   color:#111;
                   }
+
+
+  .value a {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #0077cc;
+    text-decoration: underline;
+  }
+  
+  @media(max-width: 600px){
+    .value a {
+      font-size: 14px;
+      word-break: break-all;
+    }
+  }

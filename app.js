@@ -177,29 +177,36 @@ card.classList.add("open")
 })
 }
 
-function card(t,l,v,links=false){
-  let h=`
+function card(t, l, v) {
+  let h = `
   <div class="card">
-  <div class="card-header">${t}</div>
-  <div class="card-body">
-  `
-  
-  l.forEach((label,i)=>{
-  h+=`
-  <div class="row">
-  <div class="label">${label}</div>
-  <div class="value">${v[i] ?? ""}</div>
+    <div class="card-header">${t}</div>
+    <div class="card-body">
+  `;
+
+  l.forEach((label, i) => {
+    let val = v[i] ?? "-";
+
+    // ✅ Si es un link, envolverlo en <a> clickeable
+    if (typeof val === "string" && val.startsWith("http")) {
+      val = `<a href="${val}" target="_blank" rel="noopener noreferrer">${val}</a>`;
+    }
+
+    h += `
+      <div class="row">
+        <div class="label">${label}</div>
+        <div class="value">${val}</div>
+      </div>
+    `;
+  });
+
+  h += `
+    </div>
   </div>
-  `
-  })
-  
-  h+=`
-  </div>
-  </div>
-  `
-  
-  return h
-  }
+  `;
+
+  return h;
+}
 
 function wrapCard(title,content){
 return`
