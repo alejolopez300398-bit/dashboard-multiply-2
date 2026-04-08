@@ -128,25 +128,31 @@ function buscar(code){
     row.planos_muebles
     ])}
   
-  ${card("Entrega",
-  ["entrega_inicial","entrega_final"],
+  ${card("fechas_proyecto",
+  ["inicio_obra","entrega_inicial","entrega_final"],
   [
+    row.inicio_obra
     row.entrega_inicial,
     row.entrega_final
     ])}
   
   ${card("Carpintería",
-  ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","link_rectificacion","estado_rectificacion","despacho_real","ingreso_real","fin_real"],
+  ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","estado_rectificacion","link_rectificacion","meta_facturacion","real_facturacion","despacho_meta","despacho_real","ingreso_meta","ingreso_real","fin_meta","fin_real"],
   [
     row.estado,
     row.tipo,
     row.instalador,
     row.meta_rectificacion,
     row.real_rectificacion,
-    row.link_rectificacion,
     row.estado_rectificacion,
+    row.link_rectificacion,
+    row.meta_facturacion,
+    row.real_facturacion,
+    row.despacho_meta,
     row.despacho_real,
+    row.ingreso_meta,
     row.ingreso_real,
+    row.fin_meta,
     row.fin_real
     ])}
 
