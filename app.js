@@ -27,10 +27,13 @@ async function init(){
   resumen = await loadObjects(urls.resumen)
   resumen = resumen.map(r => {
     // Si existe la columna vacía "", renombrarla a "contacto_contratista"
-    if(r[""] !== undefined){
-      r.contacto_contratista = r[""];
-      delete r[""];
+    if(r.contacto_contratista === undefined || r.contacto_contratista === null){
+      r.contacto_contratista = "-"
+    } else {
+      r.contacto_contratista = String(r.contacto_contratista).trim()
+      if(r.contacto_contratista === "") r.contacto_contratista = "-"
     }
+
     return r;
   });
   console.log("resumen cargado", resumen)
