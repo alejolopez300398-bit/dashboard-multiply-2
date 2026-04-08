@@ -2,8 +2,7 @@ function cleanKey(str) {
   return (str || "")
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, "_")
-    .replace(/[^\w]/g, "");
+    .replace(/\s+/g, "_");
 }
 
 export function normalizeSheet(rows) {
