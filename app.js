@@ -95,12 +95,12 @@ function buscar(code){
   ])}
   
   ${card("Equipo proyecto",
-  ["coordinador","residente","contratista_obra","contacto_contratista"],
+  ["coordinador","residente","contratista_obra","contacto"],
   [
   row.coordinador,
   row.residente,
   row.contratista_obra,
-  row.contacto_contratista
+  row.contacto
   ])}
 
   ${card("Diseño",
