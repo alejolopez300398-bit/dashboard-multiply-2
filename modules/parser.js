@@ -1,5 +1,5 @@
 function cleanKey(str) {
-  return str
+  return (str || "")
     .toLowerCase()
     .trim()
     .replace(/\s+/g, "_")
@@ -8,11 +8,11 @@ function cleanKey(str) {
 
 export function normalizeSheet(rows) {
 
-  // usar fila 3 como headers reales
-  const headers = rows[2].map(cleanKey);
+  // fila 5 = headers reales
+  const headers = rows[4].map(cleanKey);
 
-  // datos empiezan desde fila 4
-  return rows.slice(3).map(row => {
+  // fila 8 en adelante = datos
+  return rows.slice(7).map(row => {
     const obj = {};
 
     headers.forEach((header, i) => {
