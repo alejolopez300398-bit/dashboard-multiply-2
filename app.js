@@ -83,12 +83,13 @@ function buscar(code){
   dash.innerHTML=`
   
   ${card("Datos Proyecto",
-  ["Coordinador","Residente","Proyecto","Contratista","Tipo proyecto"],
+  ["cliente","contacto_cliente","correo_cliente","proyecto","direccion_proyecto","tipo_proyecto"],
   [
-  row.coordinador,
-  row.residente,
+  row.cliente,
+  row.contacto_cliente,
+  row.correo_cliente,
   row.proyecto,
-  row.contratista,
+  row.direccion_proyecto,
   row.tipo_proyecto
   ])}
   
