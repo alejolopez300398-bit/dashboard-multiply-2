@@ -21,18 +21,23 @@ let imp3=[]
 let imp4=[]
 
 async function init(){
-try{
-resumen = await loadObjects(urls.resumen)
-imp1 = await load(urls.imp1)
-imp2 = await load(urls.imp2)
-imp3 = await load(urls.imp3)
-imp4 = await load(urls.imp4)
-}catch(e){
-console.error(e)
-}
-
-document.getElementById("loading").style.display="none"
-}
+  try{
+  
+  console.log("cargando resumen...")
+  resumen = await loadObjects(urls.resumen)
+  console.log("resumen cargado", resumen)
+  
+  imp1 = await load(urls.imp1)
+  imp2 = await load(urls.imp2)
+  imp3 = await load(urls.imp3)
+  imp4 = await load(urls.imp4)
+  
+  }catch(e){
+  console.error("ERROR INIT:", e)
+  }
+  
+  document.getElementById("loading").style.display="none"
+  }
 
 async function load(url){
   try{
@@ -251,3 +256,5 @@ return wrapCard("IMP Reprocesos carpinteria",
 }
 
 init()
+
+window.resumen = resumen;
