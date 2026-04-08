@@ -69,42 +69,44 @@ if(code.length>2)buscar(code)
 
 function buscar(code){
 
-const dash=document.getElementById("dashboard")
-dash.innerHTML=""
-dash.style.display="none"
-
-const row=resumen.find(r=>clean(r.proyecto)===code)
-if(!row)return
-
-dash.style.display="grid"
-
-dash.innerHTML=`
-
-${card("Datos Proyecto",
-["Coordinador","Residente","Proyecto","Contratista","Tipo proyecto"],
-row.slice(1,6))}
-
-${card("Diseño",
-["Padlet","Ppto aprobado","Ppto decor","Renders","Planos obra","Planos muebles"],
-row.slice(6,12),true)}
-
-${card("Entrega",
-["Entrega inicial","Entrega final"],
-row.slice(12,14))}
-
-${card("Carpintería",
-["Estado","Tipo","Instalador","Meta rectificación","Real rectificación","Link rectificación","Estado rectificación","Despacho real","Ingreso real","Fin real"],
-row.slice(14,24),true)}
-
-${impPedido(code)}
-${impAdicional(code)}
-${impVivvidecor(code)}
-${impReprocesos(code)}
-
-`
-
-initAccordion()
-}
+  const dash=document.getElementById("dashboard")
+  dash.innerHTML=""
+  dash.style.display="none"
+  
+  const row = resumen.find(r => clean(r.codigo) === code)
+  if(!row)return
+  
+  const values = Object.values(row)
+  
+  dash.style.display="grid"
+  
+  dash.innerHTML=`
+  
+  ${card("Datos Proyecto",
+  ["Coordinador","Residente","Proyecto","Contratista","Tipo proyecto"],
+  values.slice(1,6))}
+  
+  ${card("Diseño",
+  ["Padlet","Ppto aprobado","Ppto decor","Renders","Planos obra","Planos muebles"],
+  values.slice(6,12),true)}
+  
+  ${card("Entrega",
+  ["Entrega inicial","Entrega final"],
+  values.slice(12,14))}
+  
+  ${card("Carpintería",
+  ["Estado","Tipo","Instalador","Meta rectificación","Real rectificación","Link rectificación","Estado rectificación","Despacho real","Ingreso real","Fin real"],
+  values.slice(14,24),true)}
+  
+  ${impPedido(code)}
+  ${impAdicional(code)}
+  ${impVivvidecor(code)}
+  ${impReprocesos(code)}
+  
+  `
+  
+  initAccordion()
+  }
 
 function initAccordion(){
 document.querySelectorAll(".card-header").forEach(header=>{
