@@ -1,5 +1,6 @@
 import { SHEET_ID } from "./config.js";
 import { loadSheet } from "./modules/sheets.js";
+import { loadSheetObjects } from "./modules/sheets.js";
 import { clean, linkify } from "./modules/utils.js";
 
 const sheet=name=>
@@ -21,7 +22,7 @@ let imp4=[]
 
 async function init(){
 try{
-resumen = await load(urls.resumen)
+resumen = await loadObjects(urls.resumen)
 imp1 = await load(urls.imp1)
 imp2 = await load(urls.imp2)
 imp3 = await load(urls.imp3)
@@ -34,13 +35,22 @@ document.getElementById("loading").style.display="none"
 }
 
 async function load(url){
-try{
-const data = await loadSheet(url)
-return data.slice(1)
-}catch(e){
-return []
-}
-}
+  try{
+  const data = await loadSheet(url)
+  return data.slice(1)
+  }catch(e){
+  return []
+  }
+  }
+  
+  async function loadObjects(url){
+  try{
+  const data = await loadSheetObjects(url)
+  return data
+  }catch(e){
+  return []
+  }
+  }
 
 const search = document.getElementById("search");
 
