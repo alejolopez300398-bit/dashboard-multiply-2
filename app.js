@@ -28,7 +28,7 @@ async function init(){
   resumen = resumen.map(r => {
     // Si existe la columna vacía "", renombrarla a "contacto_contratista"
     if(r[""] !== undefined){
-      r.contacto = r[""];
+      r.contacto_contratista = r[""];
       delete r[""];
     }
     return r;
