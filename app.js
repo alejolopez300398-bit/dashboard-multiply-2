@@ -130,12 +130,12 @@ function buscar(code){
     row.tipo,
     row.instalador,
     row.meta_rectificacion,
-    row.real_rectiicacion,
+    row.real_rectificacion,
     row.link_rectificacion,
-    estado_rectificacion,
-    despacho_real,
-    ingreso_real,
-    fin_real
+    row.estado_rectificacion,
+    row.despacho_real,
+    row.ingreso_real,
+    row.fin_real
     ])}
 
   
