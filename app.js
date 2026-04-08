@@ -151,24 +151,34 @@ card.classList.add("open")
 }
 
 function card(t,l,v,links=false){
-let h=`
-<div class="card">
-<div class="card-header">${t}</div>
-<div class="card-body">
-`
 
-l.forEach((x,i)=>{
-h+=`
-<div class="item">
-<div class="label">${x}</div>
-<div>${links?linkify(v[i]):(v[i]||"")}</div>
-</div>`
-})
-
-return h+`
-</div>
-</div>`
-}
+  let h=`
+  <div class="card">
+  <div class="card-header">${t}</div>
+  <div class="card-body">
+  `
+  
+  l.forEach((label,i)=>{
+  
+  const value = v[i] ?? ""
+  
+  h+=`
+  <div class="card-row">
+  <div class="card-label">${label}</div>
+  <div class="card-value">${value}</div>
+  </div>
+  `
+  
+  })
+  
+  h+=`
+  </div>
+  </div>
+  `
+  
+  return h
+  
+  }
 
 function wrapCard(title,content){
 return`
