@@ -103,11 +103,11 @@ function buscar(code){
   ])}
 
   ${card("Diseño",
-  ["vendedor","lider_diseño","diseñador","padlet_o_ppt","ppto_aprobado","ppto_decor","renders","planos_obra","planos_muebles"],
+  ["vendedor","lider_diseno","disenador","padlet_o_ppt","ppto_aprobado","ppto_decor","renders","planos_obra","planos_muebles"],
   [
     row.vendedor,
-    row.lider_diseño,
-    row.diseñador,
+    row.lider_diseno,
+    row.disenador,
     row.padlet_o_ppt,
     row.ppto_aprobado,
     row.ppto_decor,
@@ -124,7 +124,7 @@ function buscar(code){
     ])}
   
   ${card("Carpintería",
-  ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","link_rectificación","estado_rectificación","despacho_real","ingreso_real","fin_real"],
+  ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","link_rectificacion","estado_rectificacion","despacho_real","ingreso_real","fin_real"],
   [
     row.estado,
     row.tipo,
