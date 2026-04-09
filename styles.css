@@ -1,152 +1,226 @@
-body {
+/* ================== BASE ================== */
+body { 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #e9edf2;
   margin: 0;
   padding: 0;
   color: #1f2933;
   min-height: 100vh;
-  }
-  
-  /* HEADER */
-  
-  .header {
-    background: transparent;
-    padding: 20px 30px;
-    border-bottom: 1px solid #d9dee5;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    backdrop-filter: blur(6px);
-    }
-  
-  .header-title {
+}
+
+/* ================== HEADER ================== */
+.header {
+  background: transparent;
+  padding: 20px 30px;
+  border-bottom: 1px solid #d9dee5;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+
+.header-title {
   font-size: 22px;
   font-weight: 600;
   color: #1f2933;
-  }
-  
-  .header-subtitle {
+}
+
+.header-subtitle {
   font-size: 13px;
   color: #6b7280;
   margin-top: 2px;
-  }
-  
-  .search-container {
+}
+
+.search-container {
   margin-top: 15px;
-  }
-  
-  .search-input {
+}
+
+.search-input {
   width: 100%;
   max-width: 420px;
   padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid #d1d5db;
   font-size: 14px;
-  background: #f9fafb;
-  }
-  
-  .search-input:focus {
+  background: #f9fafbf6;
+}
+
+.search-input:focus {
   outline: none;
-  border-color: #22c55e;
+  border-color: #22c55efa;
   box-shadow: 0 0 0 3px rgba(34,197,94,0.1);
-  }
-  
-  /* GRID */
-  
-  .grid {
+}
+
+/* ================== GRID ================== */
+.grid {
   padding: 25px 30px;
   display: grid;
   gap: 20px;
+}
+
+/* ================== PANEL / CARD ================== */
+#dashboard > div {
+  background: rgba(240, 238, 238, 0.69);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06),
+              0 2px 6px rgba(0,0,0,0.04);
+  border: 1px solid rgba(177, 177, 177, 0.6);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.card {
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ================== ACCORDION ================== */
+.card-body {
+  display: none;
+}
+
+.card.open .card-body {
+  display: block;
+}
+
+.card-header {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 6px 0;
+  font-size: 14px;
+  color: #111827;
+  display: flex;
+  align-items: center;
+}
+
+.card-header::before {
+  content: "▶";
+  margin-right: 8px;
+  color: #355e44;
+  font-size: 12px;
+}
+
+.card.open .card-header::before {
+  content: "▼";
+  color: #355e44;
+}
+
+/* ================== ITEMS / ROWS ================== */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.label {
+  font-weight: 600;
+  color: #555;
+  flex-shrink: 0;
+}
+
+.value {
+  text-align: right;
+  color: #111;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Links dentro de value */
+.value a {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #0077cc;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .value a {
+    font-size: 14px;
+    word-break: break-all; /* evita overflow en móvil */
   }
-  
-  /* PANEL */
-  
-  #dashboard > div {
-    background: rgba(240, 238, 238, 0.69);
-    border-radius: 14px;
-    padding: 18px;
-    
-    box-shadow: 
-    0 8px 20px rgba(0,0,0,0.06),
-    0 2px 6px rgba(0,0,0,0.04);
-    
-    border: 1px solid rgba(255,255,255,0.6);
-    
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    }
-  
-  /* TITLES */
-  
-  h2 {
+}
+
+/* ================== TITLES ================== */
+h2 {
   font-size: 15px;
   margin-bottom: 12px;
-  color: #111827;
+  color: #112218;
   font-weight: 600;
-  }
-  
-  /* WATERMARK */
-  
-  .watermark {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    width: 47vw;
-    max-width: 780px;
-    
-    opacity: 0.35;
-    
-    pointer-events: none;
-    z-index: 0;
-    }
-  
-  /* TABLE */
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    background: transparent;
-    }
-  
-    th {
-      text-align: left;
-      padding: 10px;
-      background: rgba(241,245,249,0.7);
-      font-weight: 600;
-      border-bottom: 1px solid #e5e7eb;
-      }
-  
-  td {
+}
+
+/* ================== WATERMARK ================== */
+.watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 47vw;
+  max-width: 780px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================== TABLE ================== */
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.table-container table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th {
+  text-align: left;
+  padding: 10px;
+  background: rgba(241,245,249,0.7);
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+td {
   padding: 10px;
   border-bottom: 1px solid #f1f5f9;
-  }
-  
-  tr:hover {
+}
+
+tr:hover {
   background: #f8fafc;
-  }
-  
-  .loading {
+}
+
+/* ================== LOADING ================== */
+.loading {
   padding: 30px;
   font-size: 14px;
   color: #6b7280;
-  }
+  position: relative;
+  z-index: 2;
+}
 
-  /* WATERMARK LAYER FIX */
+/* ================== LAYER FIX ================== */
+.header,
+#dashboard {
+  position: relative;
+  z-index: 2;
+}
 
-.header {
-  position: relative;
-  z-index: 2;
-  }
-  
-  #dashboard {
-  position: relative;
-  z-index: 2;
-  }
-  
-  .loading {
-  position: relative;
-  z-index: 2;
-  }
+html, body {
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
