@@ -31,14 +31,27 @@ async function init(){
   
   fechas.forEach(f => {
     if(r[f] !== undefined && r[f] !== null && r[f] !== "") {
-      // Convierte a texto dd/mm/yyyy
-      const d = new Date(r[f]);
-      if(!isNaN(d)) {
+      let val = r[f].toString().trim();
+      // Detectar formato dd/mm/yyyy
+      const partes = val.split("/");
+      if(partes.length === 3){
+        const dia = partes[0].padStart(2,"0");
+        const mes = partes[1].padStart(2,"0");
+        const anio = partes[2].length === 2 ? "20"+partes[2] : partes[2]; // por si es yy
+        r[f] = `${dia}/${mes}/${anio}`;
+      } else if(!isNaN(val)) {
+        // Si es serial number de Sheets como string
+        const excelEpoch = new Date(1899,11,30);
+        const d = new Date(excelEpoch.getTime() + Number(val)*24*60*60*1000);
         const dia = String(d.getDate()).padStart(2,"0");
         const mes = String(d.getMonth()+1).padStart(2,"0");
         const anio = d.getFullYear();
         r[f] = `${dia}/${mes}/${anio}`;
+      } else {
+        r[f] = "-";
       }
+    } else {
+      r[f] = "-";
     }
   });
 
