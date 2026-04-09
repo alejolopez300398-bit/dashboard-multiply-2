@@ -186,13 +186,9 @@ function buscar(code){
   function formatFecha(val){
     if(val === "" || val === null || val === undefined) return "-";
   
-    // Si ya es string, asumir que es correcto
-    if(typeof val === "string") return val;
-  
-    // Si es número, convertir de serial date de Sheets a JS Date
+    // Si es número de serie (Sheets), convertir
     if(typeof val === "number"){
-      // En Sheets, serial 1 = 1900-01-01
-      const excelEpoch = new Date(1899, 11, 30); // 30 Dic 1899
+      const excelEpoch = new Date(1899,11,30);
       const d = new Date(excelEpoch.getTime() + val*24*60*60*1000);
       const dia = String(d.getDate()).padStart(2,"0");
       const mes = String(d.getMonth()+1).padStart(2,"0");
@@ -200,7 +196,33 @@ function buscar(code){
       return `${dia}/${mes}/${anio}`;
     }
   
-    // Si no es ni string ni number, devolver "-"
+    // Si viene como string con formato dd/mm/yyyy o mm/dd/yyyy
+    if(typeof val === "string"){
+      // Limpiar espacios
+      val = val.trim();
+      // Detectar si es fecha dd/mm/yyyy
+      const fechaParts = val.split("/");
+      if(fechaParts.length === 3){
+        const dia = fechaParts[0].padStart(2,"0");
+        const mes = fechaParts[1].padStart(2,"0");
+        const anio = fechaParts[2];
+        return `${dia}/${mes}/${anio}`;
+      }
+  
+      // Si es string tipo número (Sheets serial que llegó como string)
+      if(!isNaN(val)){
+        const excelEpoch = new Date(1899,11,30);
+        const d = new Date(excelEpoch.getTime() + Number(val)*24*60*60*1000);
+        const dia = String(d.getDate()).padStart(2,"0");
+        const mes = String(d.getMonth()+1).padStart(2,"0");
+        const anio = d.getFullYear();
+        return `${dia}/${mes}/${anio}`;
+      }
+  
+      // Si no es reconocible, devolver tal cual
+      return val;
+    }
+  
     return "-";
   }
 
