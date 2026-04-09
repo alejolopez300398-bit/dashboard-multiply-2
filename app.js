@@ -26,6 +26,22 @@ async function init(){
   console.log("cargando resumen...")
   resumen = await loadObjects(urls.resumen)
   resumen = resumen.map(r => {
+     // Si existen columnas de fechas, convertirlas a texto legible
+  const fechas = ["inicio_obra","entrega_inicial","entrega_final","meta_rectificacion","real_rectificacion","meta_facturacion","real_facturacion","despacho_meta","despacho_real","ingreso_meta","ingreso_real","fin_meta","fin_real"];
+  
+  fechas.forEach(f => {
+    if(r[f] !== undefined && r[f] !== null && r[f] !== "") {
+      // Convierte a texto dd/mm/yyyy
+      const d = new Date(r[f]);
+      if(!isNaN(d)) {
+        const dia = String(d.getDate()).padStart(2,"0");
+        const mes = String(d.getMonth()+1).padStart(2,"0");
+        const anio = d.getFullYear();
+        r[f] = `${dia}/${mes}/${anio}`;
+      }
+    }
+  });
+  
     // Si existe la columna vacía "", renombrarla a "contacto_contratista"
     if(r.contacto_contratista === undefined || r.contacto_contratista === null){
       r.contacto_contratista = "-"
@@ -136,7 +152,7 @@ function buscar(code){
     row.entrega_final
     ])}
   
-  ${card("carpintería",
+  ${card("carpinteria",
   ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","estado_rectificacion","link_rectificacion","meta_facturacion","real_facturacion","despacho_meta","despacho_real","ingreso_meta","ingreso_real","fin_meta","fin_real"],
   [
     row.estado,
