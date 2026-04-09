@@ -41,7 +41,7 @@ async function init(){
       }
     }
   });
-  
+
     // Si existe la columna vacía "", renombrarla a "contacto_contratista"
     if(r.contacto_contratista === undefined || r.contacto_contratista === null){
       r.contacto_contratista = "-"
@@ -144,32 +144,32 @@ function buscar(code){
     row.planos_muebles
     ])}
   
-  ${card("fechas_proyecto",
-  ["inicio_obra","entrega_inicial","entrega_final"],
-  [
-    row.inicio_obra,
-    row.entrega_inicial,
-    row.entrega_final
+    ${card("fechas_proyecto",
+    ["inicio_obra","entrega_inicial","entrega_final"],
+    [
+      formatFecha(row.inicio_obra),
+      formatFecha(row.entrega_inicial),
+      formatFecha(row.entrega_final)
     ])}
   
   ${card("carpinteria",
-  ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","estado_rectificacion","link_rectificacion","meta_facturacion","real_facturacion","despacho_meta","despacho_real","ingreso_meta","ingreso_real","fin_meta","fin_real"],
-  [
-    row.estado,
-    row.tipo,
-    row.instalador,
-    row.meta_rectificacion,
-    row.real_rectificacion,
-    row.estado_rectificacion,
-    row.link_rectificacion,
-    row.meta_facturacion,
-    row.real_facturacion,
-    row.despacho_meta,
-    row.despacho_real,
-    row.ingreso_meta,
-    row.ingreso_real,
-    row.fin_meta,
-    row.fin_real
+    ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","estado_rectificacion","link_rectificacion","meta_facturacion","real_facturacion","despacho_meta","despacho_real","ingreso_meta","ingreso_real","fin_meta","fin_real"],
+    [
+      row.estado,
+      row.tipo,
+      row.instalador,
+      formatFecha(row.meta_rectificacion),
+      formatFecha(row.real_rectificacion),
+      row.estado_rectificacion,
+      row.link_rectificacion,
+      formatFecha(row.meta_facturacion),
+      formatFecha(row.real_facturacion),
+      formatFecha(row.despacho_meta),
+      formatFecha(row.despacho_real),
+      formatFecha(row.ingreso_meta),
+      formatFecha(row.ingreso_real),
+      formatFecha(row.fin_meta),
+      formatFecha(row.fin_real)
     ])}
 
   
@@ -181,6 +181,22 @@ function buscar(code){
   `
   
   initAccordion()
+  }
+
+  function formatFecha(val){
+    if(!val || val === "") return "-";
+    // Si ya es string tipo "14/04/2026", dejarlo tal cual
+    if(typeof val === "string") return val;
+    
+    // Intentar parsear a Date
+    const d = new Date(val);
+    if(isNaN(d)) return "-";
+    
+    const dia = String(d.getDate()).padStart(2,"0");
+    const mes = String(d.getMonth()+1).padStart(2,"0");
+    const anio = d.getFullYear();
+    
+    return `${dia}/${mes}/${anio}`;
   }
 
 function initAccordion(){
