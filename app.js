@@ -184,19 +184,24 @@ function buscar(code){
   }
 
   function formatFecha(val){
-    if(!val || val === "") return "-";
-    // Si ya es string tipo "14/04/2026", dejarlo tal cual
+    if(val === "" || val === null || val === undefined) return "-";
+  
+    // Si ya es string, asumir que es correcto
     if(typeof val === "string") return val;
-    
-    // Intentar parsear a Date
-    const d = new Date(val);
-    if(isNaN(d)) return "-";
-    
-    const dia = String(d.getDate()).padStart(2,"0");
-    const mes = String(d.getMonth()+1).padStart(2,"0");
-    const anio = d.getFullYear();
-    
-    return `${dia}/${mes}/${anio}`;
+  
+    // Si es número, convertir de serial date de Sheets a JS Date
+    if(typeof val === "number"){
+      // En Sheets, serial 1 = 1900-01-01
+      const excelEpoch = new Date(1899, 11, 30); // 30 Dic 1899
+      const d = new Date(excelEpoch.getTime() + val*24*60*60*1000);
+      const dia = String(d.getDate()).padStart(2,"0");
+      const mes = String(d.getMonth()+1).padStart(2,"0");
+      const anio = d.getFullYear();
+      return `${dia}/${mes}/${anio}`;
+    }
+  
+    // Si no es ni string ni number, devolver "-"
+    return "-";
   }
 
 function initAccordion(){
