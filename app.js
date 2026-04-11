@@ -26,34 +26,33 @@ async function init(){
   console.log("cargando resumen...")
   resumen = await loadObjects(urls.resumen)
   resumen = resumen.map(r => {
-     // Si existen columnas de fechas, convertirlas a texto legible
-  const fechas = ["inicio_obra","entrega_inicial","entrega_final","meta_rectificacion","real_rectificacion","meta_facturacion","real_facturacion","despacho_meta","despacho_real","ingreso_meta","ingreso_real","fin_meta","fin_real"];
-  
-  fechas.forEach(f => {
-    if(r[f] !== undefined && r[f] !== null && r[f] !== "") {
-      let val = r[f].toString().trim();
-      // Detectar formato dd/mm/yyyy
-      const partes = val.split("/");
-      if(partes.length === 3){
-        const dia = partes[0].padStart(2,"0");
-        const mes = partes[1].padStart(2,"0");
-        const anio = partes[2].length === 2 ? "20"+partes[2] : partes[2]; // por si es yy
-        r[f] = `${dia}/${mes}/${anio}`;
-      } else if(!isNaN(val)) {
-        // Si es serial number de Sheets como string
-        const excelEpoch = new Date(1899,11,30);
-        const d = new Date(excelEpoch.getTime() + Number(val)*24*60*60*1000);
-        const dia = String(d.getDate()).padStart(2,"0");
-        const mes = String(d.getMonth()+1).padStart(2,"0");
-        const anio = d.getFullYear();
-        r[f] = `${dia}/${mes}/${anio}`;
-      } else {
-        r[f] = "-";
+
+    function formatFecha(val){
+
+      if(val === "" || val === null || val === undefined) return "-";
+    
+      // si ya viene dd/mm/yyyy → devolver directo
+      if(typeof val === "string" && val.includes("/")){
+        return val.trim();
       }
-    } else {
-      r[f] = "-";
+    
+      // si viene como número (serial sheets)
+      if(typeof val === "number" || !isNaN(val)){
+        const num = Number(val);
+        if(!isNaN(num)){
+          const excelEpoch = new Date(1899,11,30);
+          const d = new Date(excelEpoch.getTime() + num*86400000);
+    
+          const dia = String(d.getDate()).padStart(2,"0");
+          const mes = String(d.getMonth()+1).padStart(2,"0");
+          const anio = d.getFullYear();
+    
+          return `${dia}/${mes}/${anio}`;
+        }
+      }
+    
+      return val;
     }
-  });
 
     // Si existe la columna vacía "", renombrarla a "contacto_contratista"
     if(r.contacto_contratista === undefined || r.contacto_contratista === null){
@@ -185,7 +184,71 @@ function buscar(code){
       formatFecha(row.fin_real)
     ])}
 
-  
+    ${card("cronograma",
+    ["base_empalme","repro_empalme","real_empalme","retraso_empalme","com_empalme","base_ingreso","repro_ingreso","real_ingreso","retraso_ingreso","com_ingreso","base_gris","repro_gris","real_gris","retraso_gris","com_gris","base_blanca","repro_blanca","real_blanca","retraso_blanca","com_blanca","base_enchapes","repro_enchapes","real_enchapes","retraso_enchapes","com_enchapes","base_piso","repro_piso","real_piso","retraso_piso","com_piso","base_recti_muebles","repro_recti_muebles","real_recti_muebles","retraso_recti_muebles","com_recti_muebles","base_carpinteria","repro_carpinteria","real_carpinteria","retraso_carpinteria","com_carpinteria","base_mesones","repro_mesones","real_mesones","retraso_mesones","com_mesones","base_divisiones","repro_divisiones","real_divisiones","retraso_divisiones","com_divisiones","base_guardaescobas","repro_guardaescobas","real_guardaescobas","retraso_guardaescobas","com_guardaescobas","base_remates","repro_remates","real_remates","retraso_remates","com_remates"],
+    [
+      formatFecha(row.base_empalme),
+      formatFecha(row.repro_empalme),
+      formatFecha(row.real_empalme),
+      row.retraso_empalme,
+      row.com_empalme,
+      formatFecha(row.base_ingreso),
+      formatFecha(row.repro_ingreso),
+      formatFecha(row.real_ingreso),
+      row.retraso_ingreso,
+      row.com_ingreso,
+      formatFecha(row.base_gris),
+      formatFecha(row.repro_gris),
+      formatFecha(row.real_gris),
+      row.retraso_gris,
+      row.com_gris,
+      formatFecha(row.base_blanca),
+      formatFecha(row.repro_blanca),
+      formatFecha(row.real_blanca),
+      row.retraso_blanca,
+      row.com_blanca,
+      formatFecha(row.base_enchapes),
+      formatFecha(row.repro_enchapes),
+      formatFecha(row.real_enchapes),
+      row.retraso_enchapes,
+      row.com_enchapes,
+      formatFecha(row.base_piso),
+      formatFecha(row.repro_piso),
+      formatFecha(row.real_piso),
+      row.retraso_piso,
+      row.com_piso,
+      formatFecha(row.base_recti_muebles),
+      formatFecha(row.repro_recti_muebles),
+      formatFecha(row.real_recti_muebles),
+      row.retraso_recti_muebles,
+      row.com_recti_muebles,
+      formatFecha(row.base_carpinteria),
+      formatFecha(row.repro_carpinteria),
+      formatFecha(row.real_carpinteria),
+      row.retraso_carpinteria,
+      row.com_carpinteria,
+      formatFecha(row.base_mesones),
+      formatFecha(row.repro_mesones),
+      formatFecha(row.real_mesones),
+      row.retraso_mesones,
+      row.com_mesones,
+      formatFecha(row.base_divisiones),
+      formatFecha(row.repro_divisiones),
+      formatFecha(row.real_divisiones),
+      row.retraso_divisiones,
+      row.com_divisiones,
+      formatFecha(row.base_guardaescobas),
+      formatFecha(row.repro_guardaescobas),
+      formatFecha(row.real_guardaescobas),
+      row.retraso_guardaescobas,
+      row.com_guardaescobas,
+      formatFecha(row.base_remates),
+      formatFecha(row.repro_remates),
+      formatFecha(row.real_remates),
+      row.retraso_remates,
+      row.com_remates
+    ])}
+
   ${impPedido(code)}
   ${impAdicional(code)}
   ${impVivvidecor(code)}
