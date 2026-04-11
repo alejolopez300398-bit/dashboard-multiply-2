@@ -210,7 +210,9 @@ function buscar(code){
     "mesones",
     "divisiones",
     "guardaescobas",
-    "remates"
+    "remates",
+    "pedido_1",
+    "pedido_2"
     ]
     
     let html=""
@@ -232,13 +234,24 @@ function buscar(code){
     </div>
     
     <div class="cronograma-body">
+
+    ${soloComentario ? `
+    <div class="row">
+    <div class="label">comentario</div>
+    <div class="value">${com}</div>
+    </div>
+    `
+    :
+    `
     <div class="row"><div class="label">base</div><div class="value">${base}</div></div>
     <div class="row"><div class="label">repro</div><div class="value">${repro}</div></div>
     <div class="row"><div class="label">real</div><div class="value">${real}</div></div>
     <div class="row"><div class="label">retraso</div><div class="value">${retraso}</div></div>
     <div class="row"><div class="label">comentario</div><div class="value">${com}</div></div>
-    </div>
+    `
+    }
     
+    </div>
     </div>
     `
     
