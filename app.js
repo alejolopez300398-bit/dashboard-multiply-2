@@ -226,7 +226,7 @@ function buscar(code){
     html+=`
     <div class="cronograma-item">
     
-    <div class="cronograma-header" onclick="toggleCronograma(this)">
+    <div class="cronograma-header">
     <div>${g.toUpperCase()}</div>
     <div>${real}</div>
     </div>
@@ -258,6 +258,15 @@ function buscar(code){
       
       item.classList.toggle("open")
       }
+      
+      document.addEventListener("click",function(e){
+      
+      const header = e.target.closest(".cronograma-header")
+      if(!header) return
+      
+      toggleCronograma(header)
+      
+      })
 
 
   function formatFecha(val){
