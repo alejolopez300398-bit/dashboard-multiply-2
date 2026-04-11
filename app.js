@@ -226,7 +226,7 @@ function buscar(code){
     html+=`
     <div class="cronograma-item">
     
-    <div class="cronograma-header" onclick="this.parentElement.classList.toggle('open')">
+    <div class="cronograma-header" onclick="toggleCronograma(this)">
     <div>${g.toUpperCase()}</div>
     <div>${real}</div>
     </div>
@@ -246,6 +246,19 @@ function buscar(code){
     
     return wrapCard("Cronograma",html)
     }
+
+    function toggleCronograma(el){
+
+      const item = el.parentElement
+      const card = item.closest(".card")
+      
+      card.querySelectorAll(".cronograma-item").forEach(i=>{
+      if(i!==item) i.classList.remove("open")
+      })
+      
+      item.classList.toggle("open")
+      }
+
 
   function formatFecha(val){
     if(val === "" || val === null || val === undefined) return "-";
