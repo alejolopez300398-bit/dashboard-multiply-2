@@ -221,7 +221,7 @@ function buscar(code){
     const base=formatFecha(row[`base_${g}`]) || "-"
     const repro=formatFecha(row[`repro_${g}`]) || "-"
     const retraso=row[`retraso_${g}`] ?? "-"
-    const com=row[`com_${g}`] ?? "-"
+    const com=(row[`com_${g}`] || "-").replace(/\n/g,"<br><br>")
     
     html+=`
     <div class="cronograma-item">
