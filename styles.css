@@ -259,3 +259,10 @@ html, body {
   word-break: break-word;
   text-align: left;
   }
+
+  /* ================== DIRECCION PROYECTO MOBILE FIX ================== */
+
+  .card .value{
+    white-space: normal;
+    line-height: 1.25;
+    }

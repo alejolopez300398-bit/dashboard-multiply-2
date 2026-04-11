@@ -129,7 +129,7 @@ function buscar(code){
   row.contacto_cliente,
   row.correo_cliente,
   row.proyecto,
-  row.direccion_proyecto,
+  (row.direccion_proyecto || "-").replace(/\n/g,"<br><br>"),
   row.tipo_proyecto
   ])}
   
