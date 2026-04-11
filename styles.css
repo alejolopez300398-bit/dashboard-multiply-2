@@ -105,7 +105,31 @@ body {
 .card.open .card-header::before {
   content: "▼";
   color: #355e44;
+  
 }
+
+/* ================== ACCORDION in cronograma ================== */
+
+.cronograma-item{
+  border-bottom:1px solid #eee;
+  padding:6px 0;
+  }
+  
+  .cronograma-header{
+  display:flex;
+  justify-content:space-between;
+  cursor:pointer;
+  font-weight:600;
+  }
+  
+  .cronograma-body{
+  display:none;
+  padding-top:6px;
+  }
+  
+  .cronograma-item.open .cronograma-body{
+  display:block;
+  }
 
 /* ================== ITEMS / ROWS ================== */
 .row {
@@ -224,3 +248,4 @@ html, body {
 * {
   box-sizing: border-box;
 }
+
