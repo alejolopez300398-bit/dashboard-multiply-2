@@ -225,16 +225,18 @@ function buscar(code){
     const retraso=row[`retraso_${g}`] ?? "-"
     const com=(row[`com_${g}`] || "-").replace(/\n/g,"<br><br>")
     
+    const soloComentario = g.startsWith("pedido")
+    
     html+=`
     <div class="cronograma-item">
     
     <div class="cronograma-header">
     <div>${g.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase())}</div>
-    <div>${real}</div>
+    <div>${soloComentario ? "" : real}</div>
     </div>
     
     <div class="cronograma-body">
-
+    
     ${soloComentario ? `
     <div class="row">
     <div class="label">comentario</div>
@@ -259,6 +261,8 @@ function buscar(code){
     
     return wrapCard("Cronograma",html)
     }
+    
+
 
     function toggleCronograma(el){
 
