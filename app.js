@@ -184,70 +184,7 @@ function buscar(code){
       formatFecha(row.fin_real)
     ])}
 
-    ${card("cronograma",
-    ["base_empalme","repro_empalme","real_empalme","retraso_empalme","com_empalme","base_ingreso","repro_ingreso","real_ingreso","retraso_ingreso","com_ingreso","base_gris","repro_gris","real_gris","retraso_gris","com_gris","base_blanca","repro_blanca","real_blanca","retraso_blanca","com_blanca","base_enchapes","repro_enchapes","real_enchapes","retraso_enchapes","com_enchapes","base_piso","repro_piso","real_piso","retraso_piso","com_piso","base_recti_muebles","repro_recti_muebles","real_recti_muebles","retraso_recti_muebles","com_recti_muebles","base_carpinteria","repro_carpinteria","real_carpinteria","retraso_carpinteria","com_carpinteria","base_mesones","repro_mesones","real_mesones","retraso_mesones","com_mesones","base_divisiones","repro_divisiones","real_divisiones","retraso_divisiones","com_divisiones","base_guardaescobas","repro_guardaescobas","real_guardaescobas","retraso_guardaescobas","com_guardaescobas","base_remates","repro_remates","real_remates","retraso_remates","com_remates"],
-    [
-      formatFecha(row.base_empalme),
-      formatFecha(row.repro_empalme),
-      formatFecha(row.real_empalme),
-      row.retraso_empalme,
-      row.com_empalme,
-      formatFecha(row.base_ingreso),
-      formatFecha(row.repro_ingreso),
-      formatFecha(row.real_ingreso),
-      row.retraso_ingreso,
-      row.com_ingreso,
-      formatFecha(row.base_gris),
-      formatFecha(row.repro_gris),
-      formatFecha(row.real_gris),
-      row.retraso_gris,
-      row.com_gris,
-      formatFecha(row.base_blanca),
-      formatFecha(row.repro_blanca),
-      formatFecha(row.real_blanca),
-      row.retraso_blanca,
-      row.com_blanca,
-      formatFecha(row.base_enchapes),
-      formatFecha(row.repro_enchapes),
-      formatFecha(row.real_enchapes),
-      row.retraso_enchapes,
-      row.com_enchapes,
-      formatFecha(row.base_piso),
-      formatFecha(row.repro_piso),
-      formatFecha(row.real_piso),
-      row.retraso_piso,
-      row.com_piso,
-      formatFecha(row.base_recti_muebles),
-      formatFecha(row.repro_recti_muebles),
-      formatFecha(row.real_recti_muebles),
-      row.retraso_recti_muebles,
-      row.com_recti_muebles,
-      formatFecha(row.base_carpinteria),
-      formatFecha(row.repro_carpinteria),
-      formatFecha(row.real_carpinteria),
-      row.retraso_carpinteria,
-      row.com_carpinteria,
-      formatFecha(row.base_mesones),
-      formatFecha(row.repro_mesones),
-      formatFecha(row.real_mesones),
-      row.retraso_mesones,
-      row.com_mesones,
-      formatFecha(row.base_divisiones),
-      formatFecha(row.repro_divisiones),
-      formatFecha(row.real_divisiones),
-      row.retraso_divisiones,
-      row.com_divisiones,
-      formatFecha(row.base_guardaescobas),
-      formatFecha(row.repro_guardaescobas),
-      formatFecha(row.real_guardaescobas),
-      row.retraso_guardaescobas,
-      row.com_guardaescobas,
-      formatFecha(row.base_remates),
-      formatFecha(row.repro_remates),
-      formatFecha(row.real_remates),
-      row.retraso_remates,
-      row.com_remates
-    ])}
+    ${cronogramaCard(row)}
 
   ${impPedido(code)}
   ${impAdicional(code)}
@@ -258,6 +195,57 @@ function buscar(code){
   
   initAccordion()
   }
+
+  function cronogramaCard(row){
+
+    const grupos=[
+    "empalme",
+    "ingreso",
+    "gris",
+    "blanca",
+    "enchapes",
+    "piso",
+    "recti_muebles",
+    "carpinteria",
+    "mesones",
+    "divisiones",
+    "guardaescobas",
+    "remates"
+    ]
+    
+    let html=""
+    
+    grupos.forEach(g=>{
+    
+    const real=formatFecha(row[`real_${g}`]) || "-"
+    const base=formatFecha(row[`base_${g}`]) || "-"
+    const repro=formatFecha(row[`repro_${g}`]) || "-"
+    const retraso=row[`retraso_${g}`] ?? "-"
+    const com=row[`com_${g}`] ?? "-"
+    
+    html+=`
+    <div class="cronograma-item">
+    
+    <div class="cronograma-header" onclick="this.parentElement.classList.toggle('open')">
+    <div>${g.toUpperCase()}</div>
+    <div>${real}</div>
+    </div>
+    
+    <div class="cronograma-body">
+    <div class="row"><div class="label">base</div><div class="value">${base}</div></div>
+    <div class="row"><div class="label">repro</div><div class="value">${repro}</div></div>
+    <div class="row"><div class="label">real</div><div class="value">${real}</div></div>
+    <div class="row"><div class="label">retraso</div><div class="value">${retraso}</div></div>
+    <div class="row"><div class="label">comentario</div><div class="value">${com}</div></div>
+    </div>
+    
+    </div>
+    `
+    
+    })
+    
+    return wrapCard("Cronograma",html)
+    }
 
   function formatFecha(val){
     if(val === "" || val === null || val === undefined) return "-";
