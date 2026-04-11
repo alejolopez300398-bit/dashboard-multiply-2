@@ -249,3 +249,13 @@ html, body {
   box-sizing: border-box;
 }
 
+/* ================== CRONOGRAMA MOBILE FIX ================== */
+
+.cronograma-body .value{
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-align: left;
+  }

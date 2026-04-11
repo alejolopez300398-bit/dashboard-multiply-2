@@ -156,7 +156,7 @@ function buscar(code){
     row.planos_muebles
     ])}
   
-    ${card("fechas_proyecto",
+    ${card("Fechas proyecto",
     ["inicio_obra","entrega_inicial","entrega_final"],
     [
       formatFecha(row.inicio_obra),
@@ -164,7 +164,7 @@ function buscar(code){
       formatFecha(row.entrega_final)
     ])}
   
-  ${card("carpinteria",
+  ${card("Carpinteria",
     ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","estado_rectificacion","link_rectificacion","meta_facturacion","real_facturacion","despacho_meta","despacho_real","ingreso_meta","ingreso_real","fin_meta","fin_real"],
     [
       row.estado,
@@ -227,7 +227,7 @@ function buscar(code){
     <div class="cronograma-item">
     
     <div class="cronograma-header">
-    <div>${g.toUpperCase()}</div>
+    <div>${g.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase())}</div>
     <div>${real}</div>
     </div>
     
