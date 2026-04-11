@@ -201,10 +201,13 @@ function buscar(code){
 
     if(!f1 || !f2) return "-"
     
-    const d1 = new Date(f1)
-    const d2 = new Date(f2)
+    const [d1,m1,y1] = f1.split("/")
+    const [d2,m2,y2] = f2.split("/")
     
-    const diff = d2 - d1
+    const fecha1 = new Date(y1, m1-1, d1)
+    const fecha2 = new Date(y2, m2-1, d2)
+    
+    const diff = fecha2 - fecha1
     
     return Math.round(diff / (1000*60*60*24))
     
