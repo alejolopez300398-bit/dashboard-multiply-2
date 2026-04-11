@@ -157,11 +157,12 @@ function buscar(code){
     ])}
   
     ${card("Fechas proyecto",
-    ["inicio_obra","entrega_inicial","entrega_final"],
+    ["inicio_obra","entrega_inicial","entrega_final","dias_retraso"],
     [
       formatFecha(row.inicio_obra),
       formatFecha(row.entrega_inicial),
-      formatFecha(row.entrega_final)
+      formatFecha(row.entrega_final),
+      diasEntre(row.entrega_inicial,row.entrega_final)
     ])}
   
   ${card("Carpinteria",
@@ -195,6 +196,20 @@ function buscar(code){
   
   initAccordion()
   }
+
+  function diasEntre(f1,f2){
+
+    if(!f1 || !f2) return "-"
+    
+    const d1 = new Date(f1)
+    const d2 = new Date(f2)
+    
+    const diff = d2 - d1
+    
+    return Math.round(diff / (1000*60*60*24))
+    
+    }
+
 
   function cronogramaCard(row){
 
