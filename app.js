@@ -129,7 +129,7 @@ function buscar(code){
   row.contacto_cliente,
   row.correo_cliente,
   row.proyecto,
-  row.direccion_proyecto,
+  (row.direccion_proyecto || "-").replace(/\n/g,"<br><br>"),
   row.tipo_proyecto
   ])}
   
@@ -156,15 +156,16 @@ function buscar(code){
     row.planos_muebles
     ])}
   
-    ${card("fechas_proyecto",
-    ["inicio_obra","entrega_inicial","entrega_final"],
+    ${card("Fechas proyecto",
+    ["inicio_obra","entrega_inicial","entrega_final","dias_retraso"],
     [
       formatFecha(row.inicio_obra),
       formatFecha(row.entrega_inicial),
-      formatFecha(row.entrega_final)
+      formatFecha(row.entrega_final),
+      diasEntre(row.entrega_inicial,row.entrega_final)
     ])}
   
-  ${card("carpinteria",
+  ${card("Carpinteria",
     ["estado","tipo","instalador","meta_rectificacion","real_rectificacion","estado_rectificacion","link_rectificacion","meta_facturacion","real_facturacion","despacho_meta","despacho_real","ingreso_meta","ingreso_real","fin_meta","fin_real"],
     [
       row.estado,
@@ -184,7 +185,8 @@ function buscar(code){
       formatFecha(row.fin_real)
     ])}
 
-  
+    ${cronogramaCard(row)}
+
   ${impPedido(code)}
   ${impAdicional(code)}
   ${impVivvidecor(code)}
@@ -194,6 +196,113 @@ function buscar(code){
   
   initAccordion()
   }
+
+  function diasEntre(f1,f2){
+
+    if(!f1 || !f2) return "-"
+    
+    const [d1,m1,y1] = f1.split("/")
+    const [d2,m2,y2] = f2.split("/")
+    
+    const fecha1 = new Date(y1, m1-1, d1)
+    const fecha2 = new Date(y2, m2-1, d2)
+    
+    const diff = fecha2 - fecha1
+    
+    return Math.round(diff / (1000*60*60*24))
+    
+    }
+
+
+  function cronogramaCard(row){
+
+    const grupos=[
+    "empalme",
+    "ingreso",
+    "gris",
+    "blanca",
+    "enchapes",
+    "piso",
+    "recti_muebles",
+    "carpinteria",
+    "mesones",
+    "divisiones",
+    "guardaescobas",
+    "remates",
+    "pedido_1",
+    "pedido_2"
+    ]
+    
+    let html=""
+    
+    grupos.forEach(g=>{
+    
+    const real=formatFecha(row[`real_${g}`]) || "-"
+    const base=formatFecha(row[`base_${g}`]) || "-"
+    const repro=formatFecha(row[`repro_${g}`]) || "-"
+    const retraso=row[`retraso_${g}`] ?? "-"
+    const com=(row[`com_${g}`] || "-").replace(/\n/g,"<br><br>")
+    
+    const soloComentario = g.startsWith("pedido")
+    
+    html+=`
+    <div class="cronograma-item">
+    
+    <div class="cronograma-header">
+    <div>${g.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase())}</div>
+    <div>${soloComentario ? "" : real}</div>
+    </div>
+    
+    <div class="cronograma-body">
+    
+    ${soloComentario ? `
+    <div class="row">
+    <div class="label">comentario</div>
+    <div class="value">${com}</div>
+    </div>
+    `
+    :
+    `
+    <div class="row"><div class="label">base</div><div class="value">${base}</div></div>
+    <div class="row"><div class="label">repro</div><div class="value">${repro}</div></div>
+    <div class="row"><div class="label">real</div><div class="value">${real}</div></div>
+    <div class="row"><div class="label">retraso</div><div class="value">${retraso}</div></div>
+    <div class="row"><div class="label">comentario</div><div class="value">${com}</div></div>
+    `
+    }
+    
+    </div>
+    </div>
+    `
+    
+    })
+    
+    return wrapCard("Cronograma",html)
+    }
+    
+
+
+    function toggleCronograma(el){
+
+      const item = el.parentElement
+      const card = item.closest(".card")
+      
+      card.querySelectorAll(".cronograma-item").forEach(i=>{
+      if(i!==item) i.classList.remove("open")
+      })
+      
+      item.classList.toggle("open")
+      }
+      
+      document.addEventListener("click",function(e){
+      
+      const header = e.target.closest(".cronograma-header")
+      if(!header) return
+      
+      toggleCronograma(header)
+      
+      })
+
 
   function formatFecha(val){
     if(val === "" || val === null || val === undefined) return "-";
